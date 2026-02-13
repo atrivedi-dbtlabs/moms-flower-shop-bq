@@ -22,7 +22,7 @@ purchase_intervals AS (
         purchase_number,
         prev_purchase_time,
         prev_purchase_amount,
-        DATEDIFF(day, prev_purchase_time, purchase_time) AS days_since_last_purchase,
+        DATE_DIFF(purchase_time, prev_purchase_time, DAY) AS days_since_last_purchase,
         purchase_amount - COALESCE(prev_purchase_amount, 0) AS purchase_amount_change
     FROM customer_purchases
 ),
@@ -51,7 +51,7 @@ repeat_customer_classification AS (
         cps.avg_purchase_value,
         cps.avg_days_between_purchases,
         cps.purchase_frequency_stddev,
-        DATEDIFF(day, cps.first_purchase_date, cps.last_purchase_date) AS customer_purchase_lifespan,
+        DATE_DIFF(cps.last_purchase_date, cps.first_purchase_date, DAY) AS customer_purchase_lifespan,
         CASE 
             WHEN cps.total_purchases >= 10 THEN 'Super Frequent'
             WHEN cps.total_purchases >= 5 THEN 'Frequent'
