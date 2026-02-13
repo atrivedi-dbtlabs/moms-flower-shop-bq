@@ -46,7 +46,7 @@ final AS (
         {{ calculate_conversion_rate('pr.paying_customers', 'pv.total_visits') }} AS visit_to_paying_rate,
         pe.total_events / NULLIF(pv.total_visits, 0) AS avg_events_per_visit,
         pr.total_revenue / NULLIF(pr.paying_customers, 0) AS avg_revenue_per_paying_customer,
-        DATEDIFF(day, pv.first_visit, pv.last_visit) AS platform_active_days
+        DATE_DIFF(pv.last_visit, pv.first_visit, DAY) AS platform_active_days
     FROM platform_visits pv
     LEFT JOIN platform_engagement pe ON pv.platform = pe.platform
     LEFT JOIN platform_revenue pr ON pv.platform = pr.platform
