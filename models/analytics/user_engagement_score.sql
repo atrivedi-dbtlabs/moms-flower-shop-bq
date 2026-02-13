@@ -11,7 +11,7 @@ WITH base_activity AS (
         COUNT(DISTINCT event_name) AS unique_event_types,
         MAX(event_time) AS last_event_time
     FROM {{ ref('stg_website_events') }}
-    WHERE event_time >= DATEADD(day, -30, CURRENT_DATE())
+    WHERE DATE(event_time) >= DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
     {% if is_incremental() %}
         AND event_time > (SELECT MAX(last_updated) FROM {{ this }})
     {% endif %}
@@ -24,7 +24,7 @@ purchase_behavior AS (
         COUNT(DISTINCT CASE WHEN event_name = 'purchase' THEN event_id END) AS purchases_last_30,
         SUM(CASE WHEN event_name = 'purchase' THEN event_value ELSE 0 END) AS revenue_last_30
     FROM {{ ref('stg_website_events') }}
-    WHERE event_time >= DATEADD(day, -30, CURRENT_DATE())
+    WHERE DATE(event_time) >= DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
     GROUP BY customer_id
 ),
 
