@@ -53,7 +53,7 @@ final AS (
         {{ calculate_conversion_rate('pip.purchasers', 'cv.total_visits') }} AS visit_to_purchase_rate,
         cc.total_spend / NULLIF(cv.total_visits, 0) AS cost_per_visit,
         pip.total_revenue / NULLIF(cc.total_spend, 0) AS return_on_ad_spend,
-        DATEDIFF(day, cv.first_visit_date, cv.last_visit_date) AS campaign_duration_days
+        DATE_DIFF(cv.last_visit_date, cv.first_visit_date, DAY) AS campaign_duration_days
     FROM campaign_visits cv
     LEFT JOIN campaign_costs cc ON cv.campaign_id = cc.campaign_id
     LEFT JOIN post_visit_purchases pip ON cv.campaign_id = pip.campaign_id
