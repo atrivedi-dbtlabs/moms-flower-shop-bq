@@ -2,8 +2,8 @@ version: 2
 
 sources:
   - name: moms_flower_shop
-    database: raw
-    schema: flower_shop
+    database: '{{target.database}}' # This should be the name of your BigQuery project as defined in profiles.yml
+    schema: raw # This should be the name of your BigQuery dataset where the raw tables are located
     tables:
       - name: raw_flower_orders
         description: Raw flower order data from the mobile app
