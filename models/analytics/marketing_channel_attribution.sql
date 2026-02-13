@@ -33,7 +33,7 @@ attributed_purchases AS (
         pe.event_id AS purchase_event_id,
         pe.purchase_time,
         pe.purchase_value,
-        DATEDIFF(day, ct.touchpoint_time, pe.purchase_time) AS days_to_purchase
+        DATE_DIFF(pe.purchase_time, ct.touchpoint_time, DAY) AS days_to_purchase
     FROM customer_touchpoints ct
     INNER JOIN purchase_events pe 
         ON ct.customer_id = pe.customer_id

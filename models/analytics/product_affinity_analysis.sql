@@ -21,7 +21,7 @@ event_transitions AS (
         next_event,
         COUNT(*) AS transition_count,
         COUNT(DISTINCT customer_id) AS unique_customers,
-        AVG(DATEDIFF(second, prev_event_time, event_time)) AS avg_seconds_between_events
+        AVG(DATE_DIFF(event_time, prev_event_time, SECOND)) AS avg_seconds_between_events
     FROM event_sequences
     WHERE prev_event IS NOT NULL
     GROUP BY prev_event, current_event, next_event

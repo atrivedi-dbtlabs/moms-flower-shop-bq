@@ -19,7 +19,7 @@ campaign_engagement AS (
         i.campaign_id,
         COUNT(DISTINCT e.event_id) AS total_post_visit_events,
         COUNT(DISTINCT e.customer_id) AS engaged_customers,
-        AVG(DATEDIFF(hour, i.event_time, e.event_time)) AS avg_hours_to_first_event
+        AVG(DATE_DIFF(e.event_time, i.event_time, HOUR)) AS avg_hours_to_first_event
     FROM {{ ref('stg_website_hits') }} i
     INNER JOIN {{ ref('stg_website_events') }} e 
         ON i.customer_id = e.customer_id
@@ -32,11 +32,11 @@ campaign_retention AS (
     SELECT 
         i.campaign_id,
         COUNT(DISTINCT CASE 
-            WHEN DATEDIFF(day, i.event_time, e.event_time) BETWEEN 1 AND 7 
+            WHEN DATE_DIFF(e.event_time, i.event_time, DAY) BETWEEN 1 AND 7 
             THEN e.customer_id 
         END) AS day_7_retained,
         COUNT(DISTINCT CASE 
-            WHEN DATEDIFF(day, i.event_time, e.event_time) BETWEEN 1 AND 30 
+            WHEN DATE_DIFF(e.event_time, i.event_time, DAY) BETWEEN 1 AND 30 
             THEN e.customer_id 
         END) AS day_30_retained
     FROM {{ ref('stg_website_hits') }} i

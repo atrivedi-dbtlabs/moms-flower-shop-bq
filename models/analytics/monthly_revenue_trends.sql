@@ -2,22 +2,22 @@
 
 WITH monthly_revenue AS (
     SELECT 
-        DATE_TRUNC('month', ORDER_TIME) AS revenue_month,
+        DATE_TRUNC(ORDER_TIME, MONTH) AS revenue_month,
         platform,
         SUM( flowers_amount + vase_amount + chocolate_amount) AS total_revenue,
         COUNT(DISTINCT customer_id) AS paying_customers,
         COUNT(DISTINCT order_id) AS total_transactions
     FROM {{ ref('stg_flower_orders') }}
-    GROUP BY DATE_TRUNC('month', ORDER_TIME), platform
+    GROUP BY DATE_TRUNC(ORDER_TIME, MONTH), platform
 ),
 
 monthly_visits AS (
     SELECT 
-        DATE_TRUNC('month', event_time) AS visit_month,
+        DATE_TRUNC(event_time, MONTH) AS visit_month,
         platform,
         COUNT(DISTINCT customer_id) AS new_visits
     FROM {{ ref('stg_website_hits') }}
-    GROUP BY DATE_TRUNC('month', event_time), platform
+    GROUP BY DATE_TRUNC(event_time, MONTH), platform
 ),
 
 cumulative_metrics AS (
@@ -49,7 +49,7 @@ final AS (
         LAG(total_revenue) OVER (PARTITION BY platform ORDER BY revenue_month) AS prev_month_revenue,
         total_revenue / NULLIF(paying_customers, 0) AS arpu,
         total_revenue / NULLIF(total_transactions, 0) AS avg_transaction_value,
-        ((total_revenue - LAG(total_revenue) OVER (PARTITION BY platform ORDER BY revenue_month))::FLOAT 
+        (CAST(total_revenue - LAG(total_revenue) OVER (PARTITION BY platform ORDER BY revenue_month) AS NUMERIC)
             / NULLIF(LAG(total_revenue) OVER (PARTITION BY platform ORDER BY revenue_month), 0)) * 100 AS revenue_growth_rate
     FROM cumulative_metrics
 )

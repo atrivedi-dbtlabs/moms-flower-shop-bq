@@ -7,7 +7,7 @@ WITH raw_flower_orders AS (
 SELECT 
     order_id,
     customer_id,
-    TO_TIMESTAMP(order_time/1000) AS order_time,
+    TIMESTAMP_SECONDS(CAST(order_time/1000 AS INT64)) AS order_time,
     order_value,
     flowers_amount,
     vase_amount,
