@@ -7,7 +7,7 @@ WITH raw_website_events AS (
 SELECT 
     event_id,
     customer_id,
-    TO_TIMESTAMP(event_time/1000) AS event_time,  
+    TIMESTAMP_SECONDS(CAST(event_time/1000 AS INT64)) AS event_time,  
     event_name,
     event_value,
     additional_details,
