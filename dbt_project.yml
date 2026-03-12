@@ -1,11 +1,17 @@
-name: 'moms_flower_shop'
+name: 'moms_flower_shop_uni'
 version: '1.0.0'
 config-version: 2
 
 profile: 'moms_flower_shop'  # see profiles.yml for more information
 
-dbt-cloud:
-    project-id: 515527
+# This config is for connecting this local project to dbt Platform. 
+# You can find the project-id in the URL when you are on the project page on platform. 
+# For example, if your URL is https://...dbt.com/dashboard/<account-number>/projects/515527/, then your project-id is 515527.
+# Uncomment the lines below and add your project-id to connect to dbt Platform. 
+# This will allow you to run dbt commands from the UI, and also use features like the IDE and job scheduler.
+
+# dbt-cloud:
+#     project-id: 515527
     
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
@@ -26,11 +32,6 @@ clean-targets:         # directories to be removed by `dbt clean`
 # Full documentation: https://docs.getdbt.com/reference/model-configs
 
 models:
-  moms_flower_shop:
+  moms_flower_shop_uni:
     # Config indicated by + and applies to all files under models/example/
-    staging:
-      +materialized: view
-      +schema: staging
-    analytics:
-      +materialized: table
-      +schema: analytics
+    +materialized: view
