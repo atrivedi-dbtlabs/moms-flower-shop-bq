@@ -69,7 +69,10 @@ final as (
         firsts.first_go_to_checkout_time,
         firsts.first_place_order_time,
 
-        case 
+        firsts.first_go_to_checkout_time is not null as reached_checkout,
+        firsts.first_place_order_time is not null as placed_order, 
+
+        case
             when firsts.first_place_order_time is null then null
             when coalesce(firsts.first_page_hit_time, firsts.first_add_to_cart_time) is null then null
             else timestamp_diff(
