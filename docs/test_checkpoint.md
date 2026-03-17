@@ -89,7 +89,7 @@ Expectation:
 Suggested file:
 - `tests/test_place_order_after_page_hit.sql`
 
-### Optional test #2: econciliation sanity check 
+### Optional test #2: reconciliation sanity check 
 Expectation:
 - Count of customers with `place_order` events should be in the same ballpark as count of customers with orders.
 - This does not need to be exact, but it should not be wildly off.
