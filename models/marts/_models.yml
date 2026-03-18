@@ -1,7 +1,32 @@
 models:
   - name: fct_customer_funnel
+    description: "One row per customer. First timestamps for each funnel step plus derived conversion flags and time-to-order."
     columns:
       - name: customer_id
+        description: "Unique identifier for each customer."
         data_tests:
           - unique
           - not_null
+      - name: first_page_hit_time
+        description: "Timestamp of the first page hit event."
+      - name: first_add_to_cart_time
+        description: "Timestamp of the first add to cart event."
+      - name: first_go_to_checkout_time
+        description: "Timestamp of the first go to checkout event."
+      - name: first_place_order_time
+        description: "Timestamp of the first place order event."
+      - name: reached_checkout
+        description: "Flag indicating if the customer reached the checkout step."
+      - name: placed_order
+        description: "Flag indicating if the customer placed an order."
+      - name: time_to_order_seconds
+        description: "Seconds from first page hit or first add to cart to first place order. Null if no order was placed."
+      - name: platform
+        description: "Platform associated with the order event when present, otherwise derived from the latest event."
+  - name: mart_platform_funnel_metrics
+    description: "One row per platform. Conversion rate and average time-to-order metrics."
+    columns:
+      - name: conversion_rate
+        description: "Conversion rate for the platform: dividing the number of those who placed orders by the number who reached the checkout."
+      - name: avg_time_to_order_seconds
+        description: "Average time to order (in seconds) for the platform."
