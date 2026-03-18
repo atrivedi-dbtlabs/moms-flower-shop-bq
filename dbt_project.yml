@@ -33,5 +33,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   moms_flower_shop_uni:
-    # Config indicated by + and applies to all files under models/example/
-    +materialized: view
+    staging: # Config indicated by + and applies to all files under models/example/
+      +materialized: view
+    marts:
+      +materialized: table

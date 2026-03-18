@@ -1,7 +1,0 @@
-sources:
-  - name: moms_flower_shop
-    project: university-partnerships-484419  
-    dataset: raw  
-    tables:
-      - name: raw_website_events
-      - name: raw_flower_orders
