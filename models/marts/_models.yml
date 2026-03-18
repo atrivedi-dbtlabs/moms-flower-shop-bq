@@ -1,0 +1,7 @@
+models:
+  - name: fct_customer_funnel
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
