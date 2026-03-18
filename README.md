@@ -11,9 +11,7 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-This project was the default sample project for SDF, now available to use with the dbt Fusion Engine. 
-
-This git repo is used in the Mom's Flower Shop dbt Platform Sandbox Account for Coalesce attendees to get hands on with the dbt Fusion Engine!
+This project was the default sample project for SDF, now available to use with the dbt Fusion Engine. Here, we are using it for the University Partners program.
 
 The project contains data about Mom's Flower Shop, including:
 1. **Customers** - Customer information
@@ -27,9 +25,8 @@ The project contains data about Mom's Flower Shop, including:
 ### `staging`
 Staging models live in `models/staging/`. These are lightweight views, prefixed with `stg_` that clean and standardize source data for reuse by downstream models.
 
-### `analytics`
-Analytics models live in `models/analytics/`. These models consume staging outputs and produce business-facing tables and views (aggregations, weekly/monthly trends, campaign summaries). They may be materialized as tables, incremental models, or ephemeral models depending on performance and use case.
-
+### `marts`
+Marts models live in `models/marts/`. These models consume staging outputs and produce business-facing tables and views (aggregations, fact tables, etc). They may be materialized as tables, incremental models, or ephemeral models depending on performance and use case.
 
 ## Model Lineage
 
@@ -38,12 +35,5 @@ Raw (source tables)
     ↓  
 Staging Models (Views with stg_ prefix)
     ↓
-Analytics 
+Marts Models 
 ```
-
-## Troubleshooting
-
-If you encounter issues, please reach out to dbt Support at support@getdbt.com!
-
-For more information, see the [dbt documentation](https://docs.getdbt.com/).
-
