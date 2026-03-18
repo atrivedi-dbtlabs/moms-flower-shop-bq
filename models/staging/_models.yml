@@ -1,7 +1,9 @@
 models:
   - name: stg_mfs__flower_orders
+    description: "Cleaned orders with timestamps converted from epoch ms."
     columns:
       - name: order_id
+        description: "Unique identifier for each order."
         data_tests:
           - unique
           - not_null
@@ -9,12 +11,15 @@ models:
         data_tests:
           - not_null
   - name: stg_mfs__website_events
+    description: "Cleaned website events with timestamps converted from epoch ms."
     columns:
       - name: event_id
+        description: "Unique identifier for each website event."
         data_tests:
           - not_null
           - unique
       - name: event_name
+        description: "Name of the website event. Allow only: 'page_hit', 'add_to_cart', 'go_to_checkout', 'place_order'."
         data_tests:
           - not_null
           - accepted_values:
