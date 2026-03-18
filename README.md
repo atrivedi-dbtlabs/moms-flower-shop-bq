@@ -11,7 +11,7 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-This project was the default sample project for SDF, now available to use with the dbt Fusion Engine. 
+This project was the default sample project for SDF, now available to use with the dbt Fusion Engine. Here, we are using it for the University Partners program.
 
 The project contains data about Mom's Flower Shop, including:
 1. **Customers** - Customer information
