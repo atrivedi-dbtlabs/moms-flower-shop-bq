@@ -1,0 +1,4 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "dbt.dbtPythonPathOverride": "C:\\Python312\\python.exe"
+}
