@@ -10,8 +10,8 @@ profile: 'moms_flower_shop'  # see profiles.yml for more information
 # Uncomment the lines below and add your project-id to connect to dbt Platform. 
 # This will allow you to run dbt commands from the UI, and also use features like the IDE and job scheduler.
 
-# dbt-cloud:
-#     project-id: 515527
+dbt-cloud:
+    project-id: 515527
     
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
