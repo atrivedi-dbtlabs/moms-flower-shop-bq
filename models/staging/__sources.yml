@@ -1,0 +1,11 @@
+version: 2
+sources:
+ - name: moms_flower_shop
+   database: moms-flower-shop-uni
+   schema: raw
+   tables:
+    - name: 'raw_website_events'
+    - name: 'raw_flower_orders'
+    - name: 'raw_flower_orders2'    
+    - name: 'raw_marketing_campaign_events'
+    - name: 'raw_customers'
